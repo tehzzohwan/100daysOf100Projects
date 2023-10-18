@@ -6,6 +6,7 @@ const numbersEl = document.getElementById('numbers');
 const symbolsEl = document.getElementById('symbols');
 const generateEl = document.getElementById('generate');
 const clipboard = document.getElementById('clipboard');
+const reverseE1 = document.getElementById('reverse');
 
 const randomFunc = {
 	lower: getRandomLower,
@@ -37,6 +38,16 @@ generate.addEventListener('click', () => {
 	
 	resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
 });
+
+reverseE1.addEventListener('click', () => {
+	const generatedPassword = resultEl.innerText;
+
+	if (!generatedPassword) { return; }
+
+	const reversedPassword = reverseString(generatedPassword);
+
+	resultEl.innerText = reversedPassword;
+})
 
 function generatePassword(lower, upper, number, symbol, length) {
 	let generatedPassword = '';
@@ -76,4 +87,8 @@ function getRandomNumber() {
 function getRandomSymbol() {
 	const symbols = '!@#$%^&*(){}[]=<>/,.'
 	return symbols[Math.floor(Math.random() * symbols.length)];
+}
+
+function reverseString(str) {
+	return str.split("").reverse().join("");
 }
