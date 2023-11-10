@@ -39,7 +39,7 @@ const testimonials = [{
 addTestimonial(0);
 
 authorsEl.forEach((author, idx) => {
-	author.addEventListener('click', (e) => {
+	author.addEventListener('mouseover', (e) => {
 		addTestimonial(idx);
 		author.classList.add('selected');
 	})

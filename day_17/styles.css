@@ -51,7 +51,8 @@ body {
 
 .rating.active, .rating:hover {
 	border-radius: 4px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+	background-color: #e2c8b7;
 }
 
 .rating img {

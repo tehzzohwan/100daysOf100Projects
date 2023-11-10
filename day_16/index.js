@@ -1,10 +1,14 @@
 const love_btns = document.querySelectorAll('.love');
 
 love_btns.forEach(love_btn => {
-	love_btn.addEventListener('mousedown', (e) => {
+	love_btn.addEventListener('click', (e) => {
 		love_btn.style.background = '#fff';
 		love_btn.style.color = '#E7273F';
-		love_btn.querySelector('.text').innerHTML = '<span class="grey-text">Sent to:</span> Tehzz Ohwan';
+		setTimeout(function() {
+			love_btn.click();
+			love_btn.querySelector('.text').innerHTML = 'THANK YOU! <i class="fas fa-redo"></i>';
+		}, 3000);
+		
 
 		createHearts(love_btn.querySelector('.icon-container'));
 	});
@@ -12,7 +16,7 @@ love_btns.forEach(love_btn => {
 	love_btn.addEventListener('mouseup', (e) => {
 		love_btn.style.background = '#E7273F';
 		love_btn.style.color = '#fff';
-		love_btn.querySelector('.text').innerHTML = 'THANK YOU! <i class="fas fa-redo"></i>';
+		love_btn.querySelector('.text').innerHTML = '<span class="grey-text">Sent to:</span> Tehzz Ohwan';
 	});
 })
 

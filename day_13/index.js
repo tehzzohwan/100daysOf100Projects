@@ -21,7 +21,6 @@ toggle.addEventListener('click', (e) => {
 });
 
 
-
 function setTime() {
 	const time = new Date();
 	const month = time.getMonth();
@@ -37,9 +36,23 @@ function setTime() {
 	minuteEl.style.transform = `translate(-50%, -100%) rotate(${scale(minutes, 0, 59, 0, 360)}deg)`;
 	secondEl.style.transform = `translate(-50%, -100%) rotate(${scale(seconds, 0, 59, 0, 360)}deg)`;
 	
-	timeEl.innerHTML = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
+	if (isTwelveHourFormat) {
+		const ampm = hours >= 12 ? 'PM' : 'AM';
+		const twelveHour = hours % 12 || 12;
+		timeEl.innerHTML = `${twelveHour}:${minutes < 10 ? `0${minutes}` : minutes} ${ampm}`;
+	  } else {
+		timeEl.innerHTML = `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
+	  }
+	  
+	if (isTwelveHourFormat) {
+	format.innerHTML = '24 hrs';
+	}
+	else {
+	format.innerHTML = "12 hrs";
+	}
+
 	dateEl.innerHTML = `${days[day]}, ${months[month]} <span class="circle">${date}</span>`;
-	
+
 }
 
 function tConvert (time) {
@@ -54,11 +67,14 @@ function tConvert (time) {
   return time.join (''); // return adjusted time or original string
 }
 
-const formati = format.addEventListener('click', (e) => {
-	const tFourEl = timeEl.innerHTML;
-	const twlvHrsEl = tConvert(tFourEl);
-	return timeEl.innerHTML = twlvHrsEl;
+let isTwelveHourFormat = true; // Track the current time format
 
+const formati = format.addEventListener('click', (e) => {
+  isTwelveHourFormat = !isTwelveHourFormat; // Toggle the format flag
+
+  // Update the time format
+  const tFourEl = isTwelveHourFormat ? timeEl.innerHTML : tConvert(timeEl.innerHTML);
+  timeEl.innerHTML = tFourEl;
 });
 
 const scale = (num, in_min, in_max, out_min, out_max) => {
